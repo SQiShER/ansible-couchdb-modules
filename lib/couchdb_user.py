@@ -357,10 +357,10 @@ class CouchDBClient:
         path_elements = []
         if self.node:
             path_elements.append('/_node/{0}'.format(self.node))
-        path_elements.append('_config/{0}'.format(section))
+        path_elements.append('/_config/{0}'.format(section))
         if option:
-            path_elements.append(option)
-        return self._get_absolute_url('/'.join(path_elements))
+            path_elements.append('/{0}'.format(option))
+        return self._get_absolute_url(''.join(path_elements))
 
     def _get_config_value(self, section, option=None):
         url = self._get_config_url(section, option)
