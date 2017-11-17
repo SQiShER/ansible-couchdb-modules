@@ -1,5 +1,89 @@
 #!/usr/bin/env python
 
+# The MIT License (MIT)
+#
+# Copyright (c) 2017 Daniel Bechler
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+DOCUMENTATION = '''
+---
+module: couchdb_database
+short_description: Creates or removes a database and manages its permissions.
+description:
+    - Creates or removes a database and manages its permissions.
+options:
+    name:
+        description:
+            - The name of the database
+        required: true
+    host:
+        description:
+            - The host running the database
+        required: false
+        default: localhost
+    port:
+        description:
+            - The port to connect to
+        required: false
+        default: 5984
+    admin_roles:
+        description:
+            - The roles that should be able to administer this database
+        required: false
+        default: []
+    admin_names:
+        description:
+            - The names of users that should be able to administer this database
+        required: false
+        default: []
+    member_roles:
+        description:
+            - The roles that should be able to read and write from and to this database
+        required: false
+        default: []
+    member_names:
+        description:
+            - The names of users that should be able to read and write from and to this database
+        required: false
+        default: []
+    state:
+        description:
+            - The database state
+        required: false
+        default: present
+        choices: [ "present", "absent" ]
+    login_user:
+        description:
+            - The username used to authenticate with
+        required: false
+    login_password:
+        description:
+            - The password used to authenticate with
+        required: false
+version_added: 1.9
+requirements: [ "requests" ]
+notes:
+    - This modules requires the CouchDB cookie authentication handler to be enabled.
+author: Daniel Bechler
+'''
+
 try:
     import json
 except ImportError:
